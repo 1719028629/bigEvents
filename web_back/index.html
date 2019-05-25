@@ -166,7 +166,7 @@
                 url: 'https://autumnfish.cn/big32/admin/getuser',
                 type: 'get',
                 success: function (backdata) {
-                    console.log(backdata);
+                    // console.log(backdata);
                     $('.user_info i').text(backdata.data.nickname)
                     $('.user_pic').attr('src', backdata.data.user_pic)
                 }
