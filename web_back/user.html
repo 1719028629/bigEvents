@@ -24,22 +24,22 @@
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">用户名称：</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" id="inputEmail3" value="李思思">
+                        <input type="text" class="form-control username" id="inputEmail3" value="李思思">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">昵称：</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" id="inputEmail3" value="思思">
+                        <input type="text" class="form-control nickname" id="inputEmail3" value="思思">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">邮箱：</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" id="inputEmail3" value="lisisi@126.com">
+                        <input type="text" class="form-control email" id="inputEmail3" value="lisisi@126.com">
                     </div>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="inputPassword3" class="col-sm-2 control-label">用户图标：</label>
                     <div class="col-sm-10">
@@ -49,13 +49,13 @@
                 </div>
 
                 <div class="form-group">
-                        <label for="inputEmail3" class="col-sm-2 control-label">密码：</label>
-                        <div class="col-sm-4">
-                            <input type="password" class="form-control" id="inputEmail3" value="12345678">
-                        </div>
+                    <label for="inputEmail3" class="col-sm-2 control-label">密码：</label>
+                    <div class="col-sm-4">
+                        <input type="password" class="form-control password" id="inputEmail3" value="12345678">
                     </div>
-               
-    
+                </div>
+
+
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                         <button type="submit" class="btn btn-success">修改</button>
@@ -65,6 +65,77 @@
         </div>
     </div>
 
+
+    <!-- 自己的代码逻辑 -->
+    <script>
+        $(function () {
+            /*
+        获取用户的详细信息
+            请求地址：https://autumnfish.cn/big32/admin/userinfo_get
+            请求方式：get
+            请求参数：无
+            进入之后，获取用户的信息，渲染到页面上
+            步骤
+            1. 进入个人中心之后
+            2. 调用获取用户详细信息接口
+            3. 数据获取到之后 渲染到 页面上
+            */
+
+            $.ajax({
+                url: 'https://autumnfish.cn/big32/admin/userinfo_get',
+                type: 'get',
+                success: function (backdata) {
+                    console.log(backdata);
+                    for (const key in backdata.data) {
+                        $('input.' + key).val(backdata.data[key])
+                        $('.user_pic').attr('src', backdata.data.user_pic)
+                    }
+                }
+            })
+
+            /*
+            本地图片预览
+              1. 为input file 绑定change事件 
+              2. 获取this.files[0]
+              3. 调用方法生成url
+              4. 设置给隔壁的img即可
+            */
+
+            $('#exampleInputFile').change(function () {
+                var file = this.files[0]
+                var url = URL.createObjectURL(file);
+                console.log(url);
+                $('.user_pic').attr('src', url)
+            })
+
+            /*
+            保存修改
+              请求地址：https://autumnfish.cn/big32/admin/userinfo_edit
+              请求方式：post
+              请求参数：使用formdata提交
+              步骤
+              1. 为修改按钮绑定点击事件
+              2. 获取表单数据
+              3. 通过ajax 结合formData发送到服务器
+              4. 返回数据之后，提示用户
+            */
+            $('.btn-success').click(function (e) {
+                e.preventDefault();
+                var formData = new FormData($('form')[0])
+                $.ajax({
+                    url: "https://autumnfish.cn/big32/admin/userinfo_edit",
+                    type: 'post',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function (backdata) {
+                        console.log(backdata);
+                    }
+                })
+            })
+
+        })
+    </script>
 </body>
 
 </html>
