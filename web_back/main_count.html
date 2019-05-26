@@ -19,25 +19,25 @@
         <div class="row spannel_list">
             <div class="col-sm-3 col-xs-6">
                 <div class="spannel">
-                    <em>10015</em><span>篇</span>
+                    <em class="all_count">10015</em><span>篇</span>
                     <b>总文章数</b>
                 </div>
             </div>
             <div class="col-sm-3 col-xs-6">
                 <div class="spannel scolor01">
-                    <em>123</em><span>篇</span>
+                    <em class="day_count">123</em><span>篇</span>
                     <b>日新增文章数</b>
                 </div>
             </div>
             <div class="col-sm-3 col-xs-6">
                 <div class="spannel scolor02">
-                    <em>35</em><span>条</span>
+                    <em class="all_count-1">35</em><span>条</span>
                     <b>评论总数</b>
                 </div>
             </div>
             <div class="col-sm-3 col-xs-6">
                 <div class="spannel scolor03">
-                    <em>123</em><span>条</span>
+                    <em class="day_count-1">123</em><span>条</span>
                     <b>日新增评论数</b>
                 </div>
             </div>
@@ -343,6 +343,37 @@
             };
             oColumn.setOption(oColumnopt);
 
+    </script>
+
+    <!-- 自己的代码逻辑-->
+    <script>
+        $(function(){
+            // 获取文章数量
+            $.ajax({
+                url: "https://autumnfish.cn/big/admin/article_count",
+                type: 'get',
+                success: function (backdata) {
+                    console.log(backdata);
+                    $('.all_count').text(backdata.data.all_count);
+                    $('.day_count').text(backdata.data.day_count)
+                }
+            })
+
+
+            //获取评论数量
+            $.ajax({
+                url:'https://autumnfish.cn/big/admin/comment_count',
+                type:'get',
+                success:function(backdata){
+                    console.log(backdata);
+                    $('.all_count-1').text(backdata.data.all_count);
+                    $('.day_count-1').text(backdata.data.day_count)
+                }
+            })
+
+
+            // 月新增文章K线图
+        })
     </script>
 
 
