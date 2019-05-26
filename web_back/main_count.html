@@ -482,7 +482,7 @@
           url: "https://autumnfish.cn/big/admin/article_category_count",
           type: "get",
           success: function(backdata) {
-            console.log(backdata);
+            // console.log(backdata);
             data = [];
             for (let i = 0; i < backdata.data.length; i++) {
               data.push({
@@ -490,7 +490,7 @@
                 name: backdata.data[i]["type"]
               });
             }
-            console.log(data);
+            // console.log(data);
 
             var oPie = echarts.init(document.getElementById("pie_show"));
             for (let i = 0; i < data.length - 1; i++) {
@@ -546,6 +546,22 @@
               };
             }
             oPie.setOption(oPieopt);
+          }
+        });
+
+        // 文章访问量表格
+        $.ajax({
+          url: "https://autumnfish.cn/big/admin/article_category_visit",
+          type: "get",
+          success: function(backdata) {
+            // console.log(backdata);
+            data = [];
+            for (let i = 0; i < backdata.data.length; i++) {
+              data.push({
+                count: backdata.data[i]["all_count"],
+                month: backdata.data[i]["month"]
+              });
+            }
           }
         });
       });
