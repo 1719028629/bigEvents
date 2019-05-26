@@ -181,6 +181,18 @@
 
     <!-- 自己的代码 -->
     <script>
+        function getCata() {
+            $.ajax({
+                url: 'https://autumnfish.cn/big32/admin/category_search',
+                type: 'get',
+                success: function (backdata) {
+                    console.log(backdata);
+                    var html = template('cate', backdata)
+                    $('tbody').html(html);
+                }
+            })
+        }
+
         $(function () {
 
 
@@ -197,17 +209,7 @@
                     文章新增
             */
 
-            function getCata() {
-                $.ajax({
-                    url: 'https://autumnfish.cn/big32/admin/category_search',
-                    type: 'get',
-                    success: function (backdata) {
-                        console.log(backdata);
-                        var html = template('cate', backdata)
-                        $('tbody').html(html);
-                    }
-                })
-            }
+
 
 
             getCata();
@@ -247,16 +249,22 @@
 
         })
 
-        // function deleteTr(id) {
-        //     $.ajax({
-        //         url: 'https://autumnfish.cn/big/admin/·',
-        //         type: 'post',
-        //         data:id,
-        //         success: function (backdata) {
-        //             console.log(backdata);
-        //         }
-        //     })
-        // }
+
+        // 删除分类数据
+        function deleteTr(id) {
+            // console.log(id);
+            $.ajax({
+                url: 'https://autumnfish.cn/big32/admin/category_delete',
+                type: 'post',
+                data: {
+                    id: id
+                },
+                success: function (backdata) {
+                    console.log(backdata);
+                    getCata();
+                }
+            })
+        }
 
 
 
