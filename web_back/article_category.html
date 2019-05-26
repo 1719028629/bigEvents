@@ -295,20 +295,12 @@
                         slug: $('#cata-slug-1').val(),
                     },
                     success: function (backdata) {
-                        console.log(backdata);
-                        $('#cata-slug-1').val(''),
-                            $('#cata-name-1').val(''),
+                        // console.log(backdata);
+                        $('#cata-slug-1').val(' '),
+                            $('#cata-name-1').val(' '),
                             $('#addModal-1').modal('hide');
+                        getCata();
 
-                        $.ajax({
-                            url: 'https://autumnfish.cn/big32/admin/category_search',
-                            type: 'get',
-                            success: function (backdata) {
-                                console.log(backdata);
-                                var html = template('cate', backdata)
-                                $('tbody').html(html);
-                            }
-                        })
                     }
                 })
             })
