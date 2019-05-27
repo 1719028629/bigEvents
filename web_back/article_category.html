@@ -244,7 +244,7 @@
           url: "https://autumnfish.cn/big32/admin/category_search",
           type: "get",
           success: function(backdata) {
-            console.log(backdata);
+            // console.log(backdata);
             var html = template("cate", backdata);
             $("tbody").html(html);
           }
