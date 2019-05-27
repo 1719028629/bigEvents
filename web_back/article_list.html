@@ -330,13 +330,13 @@
 
       function getList() {
         $.ajax({
-          url: "https://autumnfish.cn/big/admin/search",
+          url: "https://autumnfish.cn/big32/admin/search",
           type: "get",
           data: {
             perpage: 15
           },
           success: function(backdata) {
-            console.log(backdata);
+            // console.log(backdata);
             var html = template("wz", backdata);
             $("tbody").html(html);
           }
@@ -346,7 +346,7 @@
       // 删除文章
       function deleteTr(id) {
         $.ajax({
-          url: "https://autumnfish.cn/big/admin/article_delete",
+          url: "https://autumnfish.cn/big32/admin/article_delete",
           type: "get",
           data: {
             id: id
