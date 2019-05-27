@@ -50,13 +50,7 @@
               >文章类别：</label
             >
             <div class="col-sm-4">
-              <select class="form-control " name="type">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-              </select>
+              <select class="form-control " name="type"> </select>
             </div>
           </div>
           <div class="form-group">
@@ -113,10 +107,30 @@
         </form>
       </div>
     </div>
-
+    <!-- 模板 -->
+    <script src="./js/template-web.js"></script>
+    <!-- 所有分类模板 -->
+    <script id="option" type="text/html">
+      //$value 可以在上面自定义一个名字
+      {{each data}}
+      <option>{{$value.name}}</option>
+      {{/each}}
+    </script>
     <!-- 自己的代码逻辑 -->
     <script>
       $(function() {
+        $.ajax({
+          url: "https://autumnfish.cn/big32/admin/category_search",
+          // get 请求可以省略不写
+          type: "get",
+          success: function(backdata) {
+            console.log(backdata);
+            var html = template("option", backdata);
+            $(".form-control").append(html);
+          }
+        });
+
+        // 发表文章
         $(".btn-success").click(function(e) {
           e.preventDefault();
           var formData = new FormData($("form")[0]);
