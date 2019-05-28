@@ -335,8 +335,8 @@
 
         //获取分类数据
         $.ajax({
-          url: "https://autumnfish.cn/big32/admin/category_search",
-          // url: "http://localhost:8000/admin/category_search",
+          // url: "https://autumnfish.cn/big32/admin/category_search",
+          url: "http://localhost:8000/admin/category_search",
           // get 请求可以省略不写
           type: "get",
           success: function(backdata) {
@@ -346,35 +346,14 @@
           }
         });
 
-        // 获取文章数据
         // 声明页码
         var mypage = 1;
-        function getList() {
-          $.ajax({
-            url: "https://autumnfish.cn/big32/admin/search",
-            // url: "http://localhost:8000/admin/search",
-            type: "get",
-            data: {
-              page: mypage,
-              perpage: 8,
-              // 分类的id
-              type: $("#selCategory").val(),
-              //状态
-              state: $("#selStatus").val()
-            },
-            success: function(backdata) {
-              console.log(backdata);
-              var html = template("wz", backdata);
-              $("tbody").html(html);
-            }
-          });
-        }
-        // 默认调用一次获取文章
-        getList();
+        var mytotalpage = 10;
 
         // 设置分页插件
-        $(".pagination").twbsPagination({
-          totalPages: 35,
+        var $pagination = $(".pagination");
+        var defaultOpts = {
+          totalPages: mytotalpage,
           visiblePages: 7,
           first: "首页",
           last: "尾页",
@@ -385,7 +364,45 @@
             mypage = page;
             getList();
           }
-        });
+        };
+        $pagination.twbsPagination(defaultOpts);
+
+        // 获取文章数据
+        function getList() {
+          $.ajax({
+            // url: "https://autumnfish.cn/big32/admin/search",
+            url: "http://localhost:8000/admin/search",
+            type: "get",
+            data: {
+              page: mypage,
+              perpage: 8,
+              // 分类的id
+              type: $("#selCategory").val(),
+              //状态
+              state: $("#selStatus").val()
+            },
+            success: function(backdata) {
+              // console.log(backdata);
+              var html = template("wz", backdata);
+              $("tbody").html(html);
+              var totalPages = backdata.totalPage;
+              if (mytotalpage != totalPages) {
+                //总数变了会进来,重新赋值
+                mytotalpage = totalPages;
+                $pagination.twbsPagination("destroy");
+                $pagination.twbsPagination(
+                  $.extend({}, defaultOpts, {
+                    // 写死为第一页即可
+                    startPage: 1,
+                    totalPages: totalPages
+                  })
+                );
+              }
+            }
+          });
+        }
+        // 默认调用一次获取文章
+        getList();
 
         // 筛选
         $("#btnSearch").click(function() {
@@ -395,8 +412,8 @@
         // 删除文章
         window.deleteTr = function(id) {
           $.ajax({
-            url: "https://autumnfish.cn/big32/admin/article_delete",
-            // url: "http://localhost:8000/admin/article_delete",
+            // url: "https://autumnfish.cn/big32/admin/article_delete",
+            url: "http://localhost:8000/admin/article_delete",
             type: "get",
             data: {
               id: id
