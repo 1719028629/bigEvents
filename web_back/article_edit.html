@@ -1,83 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>文章列表</title>
-    <link rel="stylesheet" href="js/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/iconfont.css">
-    <link rel="stylesheet" href="css/main.css">
-    <link type="text/css" rel="stylesheet" href="js/jedate/css/jedate.css">
+    <link rel="stylesheet" href="js/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/iconfont.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link type="text/css" rel="stylesheet" href="js/jedate/css/jedate.css" />
     <script src="js/jquery-1.12.4.min.js"></script>
     <script src="js/jedate/js/jedate.js"></script>
     <script src="js/tinymce/js/tinymce/tinymce.min.js"></script>
     <script src="js/tinymce/js/tinymce_setup.js"></script>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="container-fluid">
-        <div class="common_title">
-            文章编辑
-        </div>
-        <div class="container-fluid common_con">
-            <form class="form-horizontal article_form">
-                <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">文章标题：</label>
-                    <div class="col-sm-10">
-                        <input type="email" class="form-control" id="inputEmail3" value="文章标题文字">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputPassword3" class="col-sm-2 control-label">文章封面：</label>
-                    <div class="col-sm-10">
-                        <img src="images/pic06.jpg" class="article_cover">
-                        <input type="file" id="exampleInputFile">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">文章类别：</label>
-                    <div class="col-sm-4">
-                        <select class="form-control">
-                            <option>类别一</option>
-                            <option>类别二</option>
-                            <option>类别三</option>
-                            <option selected>类别四</option>
-                            <option>类别五</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">发布时间：</label>
-                    <div class="col-sm-4">
-
-                        <div class="input-group">
-                            <input type="text" class="form-control" value="2019-05-17" id="dateinput">
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" type="button"
-                                    onclick="jeDate('#dateinput',{trigger:false,format: 'YYYY-MM-DD'})"><i
-                                        class="iconfont icon-icondate"></i></button>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">文章内容：</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="rich_content" name="content" placeholder="文章内容" value="文章内容">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-success">修改</button>
-                    </div>
-                </div>
-            </form>
-        </div>
+      <div class="common_title">
+        文章编辑
+      </div>
+      <div class="container-fluid common_con">
+        <form class="form-horizontal article_form">
+          <div class="form-group">
+            <input type="hidden" name="id" />
+            <label for="inputEmail3" class="col-sm-2 control-label"
+              >文章标题：</label
+            >
+            <div class="col-sm-10">
+              <input
+                type="email"
+                class="form-control"
+                id="inputEmail3"
+                value="文章标题文字"
+                name="title"
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputPassword3" class="col-sm-2 control-label"
+              >文章封面：</label
+            >
+            <div class="col-sm-10">
+              <img src="./images/2.jpg" class="article_cover" name="cover" />
+              <input type="file" id="exampleInputFile" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label"
+              >文章类别：</label
+            >
+            <div class="col-sm-4">
+              <select class="form-control" name="type">
+                <!-- <option>类别一</option>
+                <option>类别二</option>
+                <option>类别三</option>
+                <option selected>类别四</option>
+                <option>类别五</option> -->
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label"
+              >发布时间：</label
+            >
+            <div class="col-sm-4">
+              <div class="input-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  value="2019-05-17"
+                  id="dateinput"
+                  name="date"
+                />
+                <span class="input-group-btn">
+                  <button
+                    class="btn btn-default"
+                    type="button"
+                    onclick="jeDate('#dateinput',{trigger:false,format: 'YYYY-MM-DD'})"
+                  >
+                    <i class="iconfont icon-icondate"></i>
+                  </button>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label"
+              >文章内容：</label
+            >
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="rich_content"
+                name="content"
+                placeholder="文章内容"
+                value="文章内容"
+                name="content"
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="submit" class="btn btn-success">修改</button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
+    <!-- 自己的逻辑代码 -->
+    <!-- 模板 -->
+    <script src="./js/template-web.js"></script>
+    <!-- 所有分类模板 -->
+    <script id="option" type="text/html">
+      //$value 可以在上面自定义一个名字
+      {{each data}}
+      <option>{{$value.name}}</option>
+      {{/each}}
+    </script>
+    <script>
+      //获取分类数据
+      $.ajax({
+        url: "https://autumnfish.cn/big32/admin/category_search",
+        // url: "http://localhost:8000/admin/category_search",
+        // get 请求可以省略不写
+        type: "get",
+        success: function(backdata) {
+          // console.log(backdata);
+          var html = template("option", backdata);
+          $(".form-control").append(html);
+        }
+      });
 
-</body>
+      //选择图片,上面图片显示
+      $("#exampleInputFile").change(function() {
+        var file = this.files[0];
+        var url = URL.createObjectURL(file);
+        $(".article_cover").attr("src", url);
+      });
 
+      // 修改按钮
+      $(function() {
+        $(".btn-success").click(function(e) {
+          e.preventDefault();
+          $.ajax({
+            // url: "http://localhost:8000/admin/article_edit",
+            url: "https://autumnfish.cn/big32/admin/article_edit",
+            type: "post",
+            // data: $("form").serialize(),
+            data: {
+              id: myId,
+              title: $("#inputEmail3").val(),
+              type: $(".form-control").val()
+            },
+            success: function(backdata) {
+              console.log(backdata);
+            }
+          });
+        });
+      });
+
+      // 获取当要修改的文章id
+      var a = GetRequest();
+      console.log("id:" + a["id"]); //打印出传过来的id
+
+      function GetRequest() {
+        var url = location.search; //获取url中"?"符后的字串
+        var theRequest = new Object();
+        if (url.indexOf("?") != -1) {
+          var str = url.substr(1);
+          strs = str.split("&");
+          for (var i = 0; i < strs.length; i++) {
+            theRequest[strs[i].split("=")[0]] = decodeURIComponent(
+              strs[i].split("=")[1]
+            );
+          }
+        }
+        return theRequest;
+      }
+      var myId = +a["id"];
+
+      // 把当前要修改的数据渲染到页面上
+      $.ajax({
+        url: "https://autumnfish.cn/big32/admin/search",
+        // url: "http://localhost:8000/admin/search",
+        type: "get",
+        data: {
+          perpage: 100
+        },
+        success: function(backdata) {
+          // console.log(backdata);
+          for (let i = 0; i < backdata.data.length; i++) {
+            if (backdata.data[i].id == myId) {
+              // console.log(backdata.data[i]);
+              for (const key in backdata.data[i]) {
+                $("input[name=" + key + "]").val(backdata.data[i][key]);
+                $(".article_cover").attr("src", backdata.data[i][cover]);
+              }
+            }
+          }
+        }
+      });
+    </script>
+  </body>
 </html>
